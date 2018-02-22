@@ -2,19 +2,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Portfolio</title>
+    <title>Hangman Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Julius+Sans+One" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-    </header>
+    <div class="jumbotron text-center">
+        <h1 class="display-4 mb-4">HANGMAN</h1>
+        <p>I'm thinking of a word.</p>
+        <p>For every letter you guess correctly, I'll reveal where that letter is placed in the mystery word.</p>
+        <p>Do you think you can guess the word?</p>
+        <hr class="my-4">
+        <p id="get-started">Click below to get started!</p>
+        <p class="lead">
+            <a id="play-1" class="btn btn-primary btn-lg play-button" href="#" role="button">PLAY</a>
+            <a id="play-2" class="btn btn-primary btn-lg play-button" style="display: none;" href="#" role="button">PLAY AGAIN</a>
+        </p>
+    </div>
 
-    
+    <div class="current-game" style="display: none;"><!-- Current game -->
+    <div class="text-center">
+        <h2>CURRENT GAME:</h2>
+    </div>
 
-    <footer>
-    </footer>
+    <br>
+    <br>
+    <br>
 
-    <script type="text/javascript" src="assets/javascript/game.js"></script>    
+    <!-- Scoreboard -->
+    <div class="container">
+    <div class="row">
+        <!-- Keeps track of wins -->
+        <div class="col-sm-12 col-md-4 scoreboard text-center">
+            <h4>WINS</h4>
+            <h1 class="font-weight-bold">5</h1>
+        </div>
+        <!-- Keeps track of number of guesses -->
+        <div class="col-sm-12 col-md-4 scoreboard text-center">
+            <h4>NUMBER OF GUESSES REMAINING</h4>
+            <h1 class="font-weight-bold">5</h1>
+        </div>
+        <!-- Keeps track of letters already guessed -->
+        <div class="col-sm-12 col-md-4 scoreboard text-center">
+            <h4>LETTERS ALREADY GUESSED</h4>
+            <h1 class="font-weight-bold">5</h1>
+        </div>
+    </div><!-- end .row -->
+    </div><!-- end .container -->
+    </div><!-- end .current-game -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js" type="text/javascript" charset="utf-8"></script>    
 </body>
 </html>
