@@ -1,0 +1,13 @@
+body {
+    font-family: 'Julius Sans One', sans-serif;
+    background-color: #e9ecef;
+}
+
+.display-4 {
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.scoreboard {
+    border: 2px solid darkgray;
+}
+
