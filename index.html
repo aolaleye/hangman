@@ -12,19 +12,31 @@
     <div class="jumbotron text-center">
         <h1 class="display-4 mb-4">HANGMAN</h1>
         <p>I'm thinking of a word.</p>
-        <p>For every letter you guess correctly, I'll reveal where that letter is placed in the mystery word.</p>
+        <p>For every letter you guess correctly, I'll reveal where that letter is placed in the word.</p>
         <p>Do you think you can guess the word?</p>
         <hr class="my-4">
-        <p id="get-started">Click below to get started!</p>
+        <p id="get-started">Click play and begin guessing letters!</p>
         <p class="lead">
             <a id="play-1" class="btn btn-primary btn-lg play-button" href="#" role="button">PLAY</a>
             <a id="play-2" class="btn btn-primary btn-lg play-button" style="display: none;" href="#" role="button">PLAY AGAIN</a>
         </p>
     </div>
 
-    <div class="current-game" style="display: none;"><!-- Current game -->
+    <!-- Current game -->
+    <div class="current-game" style="display: none;">
     <div class="text-center">
-        <h2>CURRENT GAME:</h2>
+        <h2>Guess the Word:</h2>
+        <br>
+        <br>
+        <ul class="display-4 each-letter">
+            <!-- Javascript goes here -->
+        </ul>
+        <br>
+        <br>
+        <h5 class="font-italic">The Theme is . . .  </h5>
+        <h5 class="theme">
+            <!-- Javascript goes here -->
+        </h5>
     </div>
 
     <br>
@@ -36,21 +48,28 @@
     <div class="row">
         <!-- Keeps track of wins -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
-            <h4>WINS</h4>
-            <h1 class="font-weight-bold">5</h1>
+            <h6>WINS</h6>
+            <h1 class="font-weight-bold">
+                5<!-- Javascript goes here -->
+            </h1>
         </div>
         <!-- Keeps track of number of guesses -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
-            <h4>NUMBER OF GUESSES REMAINING</h4>
-            <h1 class="font-weight-bold">5</h1>
+            <h6>NUMBER OF GUESSES REMAINING</h6>
+            <h1 class="font-weight-bold">
+                5<!-- Javascript goes here -->
+            </h1>
         </div>
         <!-- Keeps track of letters already guessed -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
-            <h4>LETTERS ALREADY GUESSED</h4>
-            <h1 class="font-weight-bold">5</h1>
+            <h6>LETTERS ALREADY GUESSED</h6>
+            <h1 class="font-weight-bold">
+                5<!-- Javascript goes here -->
+            </h1>
         </div>
     </div><!-- end .row -->
     </div><!-- end .container -->
+    
     </div><!-- end .current-game -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
