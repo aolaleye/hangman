@@ -2,12 +2,10 @@
 var themes = ['Landscape', 'Outer Space', 'Instruments'];
 var words = ['mountain', 'galaxy', 'trombone'];
 var wins = 0;
-var remainingGuesses = 15;
-var correctLetterArrays = {
-    word1: [],
-    word2: [],
-    word3: [],
-    alreadyPressedLetters: []
+var remainingGuesses = 10;
+var currentWord = {
+    correctLetterGuesses: [], //array for user's correctly guessed letters
+    alreadyPressedLetters: [] //array for the letters user has already pressed
 }
 
 //Hides PLAY button for Game 1 and reveals current game
@@ -44,14 +42,18 @@ var keyCode = event.which;
 
 //(1) If the user presses a letter, then the letter appears in "already guessed" section (2) Subtracts 1 from remainingGuesses and prints remaining number
 function whenUserGuesses () {
-    if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0) {
+    if (currentWord.alreadyPressedLetters.includes(userKey)) {
+        console.log("you already pressed '" + userKey + "'");
+    } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0) {
         $(".guessed-letters").append(userKey + " "); 
         remainingGuesses -= 1;
         $(".remaining-guesses").empty();
         $(".remaining-guesses").append(remainingGuesses);
+        currentWord.alreadyPressedLetters.push(userKey);
     } 
 }
 whenUserGuesses();
+
 
 
 //if the user's key equals the LetterIndex, then remove the underscore and reveal the correct letter
@@ -59,7 +61,7 @@ function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
     if (userKey === words[WordIndex][LetterIndex]) {
         $("#" + LetterIndex + "").empty(); 
         $("#" + LetterIndex + "").append(" " + words[WordIndex][LetterIndex] + " ");
-        correctLetterArrays.word1.push(userKey);
+        currentWord.correctLetterGuesses.push(userKey);
     }
 }
 ifCorrectLetterGuessed(0,0);
@@ -72,8 +74,8 @@ ifCorrectLetterGuessed(0,6);
 ifCorrectLetterGuessed(0,7);
 
 //if user wins, add 1 to wins, reveal winning message, reveal button for next word
-function ifUserWins(ObjectProperty, WordIndex) {
-    if (correctLetterArrays[ObjectProperty].length === words[WordIndex].length) {
+function ifUserWins(WordIndex) {
+    if (currentWord.correctLetterGuesses.length === words[WordIndex].length) {
         event.preventDefault();
         wins++;
         $(".wins").empty();
@@ -86,7 +88,7 @@ function ifUserWins(ObjectProperty, WordIndex) {
         $("#next-word").show();
     } 
 }
-ifUserWins("word1", 0);
+ifUserWins(0);
 
 function ifUserLoses(WordIndex) {
     if (remainingGuesses === 0) {
@@ -122,9 +124,13 @@ function nextGame() {
     $(".each-letter").empty(); //<--- clears previous game
     $(".remaining-guesses").empty(); //<--- clears list of remaining guesses
     $(".guessed-letters").empty(); //<--- clears list of guessed letters
-    revealTheme(themeIndex); //<--- PARAMETER for theme index number
-    remainingGuesses = 15; //<--- resets number of guesses to 15
+    revealTheme(themeIndex); //<--- PARAMETER for the variable themeIndex
+    remainingGuesses = 10; //<--- resets number of guesses to 15
     $(".remaining-guesses").append(remainingGuesses);
+    currentWord = { 
+        correctLetterGuesses: [],
+        alreadyPressedLetters: []
+    } //<--- resets/empties correctLetterGuesses and alreadyPressedLetters arrays
 }
 $("#next-word").click(nextGame); //<--- Upon clicking NEXT WORD button
 
