@@ -1,24 +1,30 @@
 
 var themes = ['Landscape', 'Outer Space', 'Instruments'];
 var words = ['mountain', 'galaxy', 'trombone'];
-var logCorrectGuess = 0;
 var wins = 0;
-var numberOfGuesses = 15;
-
-//displays intital number of wins and remaining guesses
-$(".wins").append(wins);
-$(".remaining-guesses").append(numberOfGuesses);
+var remainingGuesses = 15;
+var correctLetterArrays = {
+    word1: [],
+    word2: [],
+    word3: [],
+    alreadyPressedLetters: []
+}
 
 //Hides PLAY button for Game 1 and reveals current game
-$("#play-1").click(function(){
+$("#play").click(function(){
     $("#get-started").hide();
-    $("#play-1").hide();
+    $("#play").hide();
+    $("#press-any-letter").show();
     //Reveals Game 1
     $(".current-game").show();
+    //displays intital number of wins and remaining guesses
+    $(".wins").append(wins);
+    $(".remaining-guesses").append(remainingGuesses);
 }) 
 
 //reveals current theme 
 function revealTheme(Index) {
+    $(".theme").empty();
     $(".theme").append(themes[Index]);
 }
 revealTheme(0); //<-- reveals theme 1
@@ -31,31 +37,41 @@ function createListItems(WordIndex) {
 }
 createListItems(0); //<--- creates list items for word 1
 
-
 //<--- everything from this point is triggered by user's key press --->
 document.onkeyup = function(event) {
 var userKey = event.key;
+var keyCode = event.which;
 
-
-//(1) If the user presses a letter that hasn't been pressed yet, then the letter appears in "already guessed" section (2) Subtracts 1 from numberOfGuesses and prints remaining number
-if (event.which > 64 && event.which < 91 && numberOfGuesses > 0) {
-    $(".guessed-letters").append(userKey + " "); 
-    numberOfGuesses -= 1;
-    $(".remaining-guesses").empty();
-    $(".remaining-guesses").append(numberOfGuesses);
-} else if (numberOfGuesses === 0) {
-    alert("Sorry you're out of guesses!");
+//(1) If the user presses a letter, then the letter appears in "already guessed" section (2) Subtracts 1 from remainingGuesses and prints remaining number
+function whenUserGuesses () {
+    if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0) {
+        $(".guessed-letters").append(userKey + " "); 
+        remainingGuesses -= 1;
+        $(".remaining-guesses").empty();
+        $(".remaining-guesses").append(remainingGuesses);
+    } 
 }
+whenUserGuesses();
 
-
+function ifUserLoses(WordIndex) {
+    if (remainingGuesses === 0) {
+        event.preventDefault();
+        $("#press-any-letter").hide();
+        $("#guess-the-word").hide();
+        $("#you-lost").show();
+        $(".each-letter").empty();
+        $(".each-letter").append(words[WordIndex]);
+        $("#next-word").show();
+    }
+}
+ifUserLoses(0);
 
 //if the user's key equals the LetterIndex, then remove the underscore and reveal the correct letter
 function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
     if (userKey === words[WordIndex][LetterIndex]) {
         $("#" + LetterIndex + "").empty(); 
         $("#" + LetterIndex + "").append(" " + words[WordIndex][LetterIndex] + " ");
-        logCorrectGuess += 1;
-        console.log(logCorrectGuess);
+        correctLetterArrays.word1.push(userKey);
     }
 }
 ifCorrectLetterGuessed(0,0);
@@ -67,39 +83,49 @@ ifCorrectLetterGuessed(0,5);
 ifCorrectLetterGuessed(0,6);
 ifCorrectLetterGuessed(0,7);
 
-if (logCorrectGuess >= words[0].length && numberOfGuesses >= 0) {
-    wins++;
-    $(".wins").empty();
-    $(".wins").append(wins);
+//if user wins, add 1 to wins, reveal winning message, reveal button for next word
+function ifUserWins(ObjectProperty, WordIndex) {
+    if (correctLetterArrays[ObjectProperty].length === words[WordIndex].length) {
+        event.preventDefault();
+        wins++;
+        $(".wins").empty();
+        $(".wins").append(wins);
+        $("#press-any-letter").hide();
+        $("#guess-the-word").hide();
+        $("#you-won").show();
+        $("#next-word").show();
+    } 
 }
+ifUserWins("word1", 0);
+
+} //<--- end document.onkeyup function
 
 
-}//<--- end document.onkeyup function
+// <----- GAME 2 ----->
+var themeIndex = 1; //<--- specifies theme index number for game 2 for nextGame() function
+
+function nextGame() {
+    //Hides next word button, hides winning or losing message
+    $("#next-word").hide();
+    $("#you-won").hide();
+    $("#you-lost").hide();
+    $("#press-any-letter").show();
+    $("#guess-the-word").show();
+    //Empties previous game and reveals new theme
+    $(".each-letter").empty(); //<--- clears previous game
+    $(".remaining-guesses").empty(); //<--- clears list of remaining guesses
+    $(".guessed-letters").empty(); //<--- clears list of guessed letters
+    revealTheme(themeIndex); //<--- PARAMETER for theme index number
+    remainingGuesses = 15; //<--- resets number of guesses to 15
+    $(".remaining-guesses").append(remainingGuesses);
+}
+$("#next-word").click(nextGame); //<--- Upon clicking NEXT WORD button
 
 
-//don't allow the same letter to be included in number of guesses
-//when game ends, add winning or losing message
 
-
-//<--- GAME 2 --->
-
-// //<--- Reveals NEXT WORD button for Game 2 --->
-// $(".current-game").hide();
-// $("#get-started").show();
-// $("play-2").show();
-// $("#play-2").click(function(){
-//     $("#get-started").hide();
-//     $("#play-2").hide();
-//     //Reveals Game 2
-//     $(".current-game").show();
-// }) 
-
-// $(".each-letter").empty(); //<--- clears previous game
-// $(".remaining-guesses").empty(); //<--- clears list of remaining guesses
-// $(".guessed-letters").empty(); //<--- clears list of guessed letters
-// revealTheme(1); //<--- reveals theme 2
-
-// revealTheme(2); //<--- reveals theme 3
+// <----- GAME 3 ----->
+themeIndex = 2;
+$("#next-word").click(nextGame);
 
 
 
