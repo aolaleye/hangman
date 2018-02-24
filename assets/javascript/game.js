@@ -53,18 +53,6 @@ function whenUserGuesses () {
 }
 whenUserGuesses();
 
-function ifUserLoses(WordIndex) {
-    if (remainingGuesses === 0) {
-        event.preventDefault();
-        $("#press-any-letter").hide();
-        $("#guess-the-word").hide();
-        $("#you-lost").show();
-        $(".each-letter").empty();
-        $(".each-letter").append(words[WordIndex]);
-        $("#next-word").show();
-    }
-}
-ifUserLoses(0);
 
 //if the user's key equals the LetterIndex, then remove the underscore and reveal the correct letter
 function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
@@ -92,11 +80,28 @@ function ifUserWins(ObjectProperty, WordIndex) {
         $(".wins").append(wins);
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
+        $(".theme-sentence").hide();
+        $(".theme").hide();
         $("#you-won").show();
         $("#next-word").show();
     } 
 }
 ifUserWins("word1", 0);
+
+function ifUserLoses(WordIndex) {
+    if (remainingGuesses === 0) {
+        event.preventDefault();
+        $("#press-any-letter").hide();
+        $("#guess-the-word").hide();
+        $(".theme-sentence").hide();
+        $(".theme").hide();
+        $("#you-lost").show();
+        $(".each-letter").empty();
+        $(".each-letter").append(words[WordIndex]);
+        $("#next-word").show();
+    }
+}
+ifUserLoses(0);
 
 } //<--- end document.onkeyup function
 
@@ -111,6 +116,8 @@ function nextGame() {
     $("#you-lost").hide();
     $("#press-any-letter").show();
     $("#guess-the-word").show();
+    $(".theme-sentence").show();
+    $(".theme").show();
     //Empties previous game and reveals new theme
     $(".each-letter").empty(); //<--- clears previous game
     $(".remaining-guesses").empty(); //<--- clears list of remaining guesses
