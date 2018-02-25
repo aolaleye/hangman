@@ -15,6 +15,7 @@ var wins = 0;
 var remainingGuesses = 12;
 var userWon = false;
 var userLost = false;
+var needsHint = false;
 
 
 
@@ -34,9 +35,14 @@ function createListItems(ObjectName) {
 
 //gives the user a hint if the user has guessed less than 4 letters correctly and there are less than 7 remmaing guesses
 function giveHint(ObjectName) {
-    if (remainingGuesses < 7 && currentWord.correctLetterGuesses.length < 4) {
+    if (remainingGuesses < 7 && currentWord.correctLetterGuesses.length < 4 && needsHint === false) {
+        needsHint = true;
+        $("#hint-button").fadeIn("slow");
+    } 
+    $("#hint-button").click(function(){
+        $("#hint-button").hide();
         $(".hint").empty().append("Hint: " + words[ObjectName][3]).fadeIn("slow");
-    }
+    }) 
 }
 
 //if user wins, add 1 to wins, reveal winning message, reveal button for next word
@@ -49,7 +55,7 @@ function ifUserWins(ObjectName) {
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
         $(".theme").hide();
-        $(".hint").hide();
+        $(".hint").empty().hide();
         $("#you-won").show();
         //reveals image of current word
         $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
@@ -91,6 +97,7 @@ function resetGame() {
     $(".remaining-guesses").empty().append(remainingGuesses); //<--- clears list of remaining guesses
     userWon = false;
     userLost = false;
+    needsHint = false;
     currentWord = { 
         correctLetterGuesses: [],
         alreadyPressedLetters: []
@@ -153,7 +160,7 @@ ifCorrectLetterGuessed("word1",5);
 ifCorrectLetterGuessed("word1",6);
 ifCorrectLetterGuessed("word1",7);
 
-giveHint ("word1");
+giveHint("word1");
 
 ifUserWins("word1");
 
@@ -206,7 +213,7 @@ function gameTwo() {
         ifCorrectLetterGuessed("word2",5);
         ifCorrectLetterGuessed("word2",6);
 
-        giveHint ("word2");
+        giveHint("word2");
        
         ifUserWins("word2");
         
@@ -264,7 +271,7 @@ function gameThree() {
         ifCorrectLetterGuessed("word3",6);
         ifCorrectLetterGuessed("word3",7);
 
-        giveHint ("word3");
+        giveHint("word3");
         
         ifUserWins("word3");
         
