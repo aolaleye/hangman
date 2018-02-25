@@ -3,7 +3,7 @@
 
 var words = {
     //theme, word, number of nonrepeated letters, hint
-    word1: ['Landscape', 'mountain', 7, 'a large landform that stretches above the surrounding land, usually in the form of a peak'],
+    word1: ['Landscape', 'mountain', 7, 'a large landform that stretches above surrounding land - usually in the form of a peak'],
     word2: ['Outer Space', 'galaxy', 5, 'a system of stars, interstellar gas, dust, and dark matter'],
     word3: ['Intsruments', 'trombone', 7, 'a musical instrument in the brass family with an extendable slide']
 }
@@ -27,9 +27,14 @@ function revealTheme(ObjectName) {
 
 //creates a list item for each letter in the current word, assigns the list item an id that is the same number as the letter's index of the word, and inserts an underscore in each list item
 function createListItems(ObjectName) {
-    $(".each-letter").empty();
     for (i = 0; i < words[ObjectName][1].length; i++) {
         $(".each-letter").append('<li id="' + i + '"> _ </li>');
+    }
+}
+
+function giveHint(ObjectName) {
+    if (remainingGuesses < 7 && currentWord.correctLetterGuesses.length < 4) {
+        $(".hint").empty().append("Hint: " + words[ObjectName][3]).fadeIn("slow");
     }
 }
 
@@ -43,6 +48,7 @@ function ifUserWins(ObjectName) {
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
         $(".theme").hide();
+        $(".hint").hide();
         $("#you-won").show();
     }
 }
@@ -55,6 +61,7 @@ function ifUserLoses(ObjectName) {
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
         $(".theme").hide();
+        $(".hint").hide();
         $("#you-lost").show();
         $(".each-letter").empty().append(words[ObjectName][1]);
     }
@@ -67,6 +74,7 @@ function resetGame() {
     $("#third-word-button").hide();    
     $("#you-won").hide();
     $("#you-lost").hide();
+    $(".hint").hide();
     $("#press-any-letter").show();
     $("#guess-the-word").show();
     $(".theme-sentence").show();
@@ -109,7 +117,7 @@ document.onkeyup = function(event) {
 var userKey = event.key;
 var keyCode = event.which;
 
-//(1) If the user pressers a key that's already been pressed, a message appears (2) If the user presses a letter, then the letter appears in "already guessed" section (3) Subtract 1 from remainingGuesses and prints remaining number
+//(1) If the user pressers a key that's already been pressed, a message appears (2) When the user presses a letter, the letter appears in "already guessed" section (3) Subtract 1 from remainingGuesses and prints remaining number
 function whenUserGuesses () {
     if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
         $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut("slow");
@@ -122,7 +130,7 @@ function whenUserGuesses () {
 }
 whenUserGuesses();
 
-//if the user's key equals the LetterIndex, then remove the underscore and reveal the correct letter
+//if the user's key equals the LetterIndex of the current word, then remove the underscore and reveal that letter
 function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
     if (userKey === words[ObjectName][1][LetterIndex]) {
         $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
@@ -139,6 +147,8 @@ ifCorrectLetterGuessed("word1",4);
 ifCorrectLetterGuessed("word1",5);
 ifCorrectLetterGuessed("word1",6);
 ifCorrectLetterGuessed("word1",7);
+
+giveHint ("word1");
 
 ifUserWins("word1");
 
@@ -190,6 +200,8 @@ function gameTwo() {
         ifCorrectLetterGuessed("word2",4);
         ifCorrectLetterGuessed("word2",5);
         ifCorrectLetterGuessed("word2",6);
+
+        giveHint ("word2");
        
         ifUserWins("word2");
         
@@ -246,6 +258,8 @@ function gameThree() {
         ifCorrectLetterGuessed("word3",5);
         ifCorrectLetterGuessed("word3",6);
         ifCorrectLetterGuessed("word3",7);
+
+        giveHint ("word3");
         
         ifUserWins("word3");
         
