@@ -24,10 +24,10 @@
 
     <!-- Current game -->
     <div class="current-game" style="display: none;">
-    <div class="text-center">
+    <div class="text-center letters-game">
         <h2 id="guess-the-word">Guess the Word:</h2>
         <div class="already-pressed text-center font-italic"></div>
-        <h2 id="you-won" style="display: none;">Great Job! You Guessed the Word!</h2>
+        <h2 id="you-won" style="display: none;">You Guessed the Word!</h2>
         <h2 id="you-lost" style="display: none;">Sorry, you're out of guesses!<br><br>The word was:</h2>
         <br>
         <br>
@@ -39,7 +39,9 @@
         <h5 class="font-italic theme-sentence">The Theme is . . .  
             <h5 class="theme"><!-- Javascript goes here --></h5>
         </h5>
-        
+    </div>
+    <div class="text-center final-score" style="display: none;">
+        <!-- Javascript goes here -->
     </div>
 
     <br>
@@ -47,12 +49,13 @@
     <br>
 
     <!-- Next Word Button -->
-    <p class="text-center"><a id="second-word" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
-    <p class="text-center"><a id="third-word" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
+    <p class="text-center"><a id="second-word-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
+    <p class="text-center"><a id="third-word-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
+    <p class="text-center"><a id="final-score-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">FINAL SCORE</a></p>
 
     <!-- Scoreboard -->
-    <div class="container">
-    <div class="row">
+    <div class="container scoreboard">
+    <div class="row mb-4">
         <!-- Keeps track of wins -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
             <h6>WINS</h6>
