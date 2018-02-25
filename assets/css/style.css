@@ -5,17 +5,19 @@ body {
 
 .display-4 {
     font-family: 'Fredericka the Great', cursive;
-    font-size: 4.5em;
-    letter-spacing: .2em;
+    font-size: 2.5em;
+}
+
+.jumbotron {
+    padding-bottom: 0;
 }
 
 .jumbotron h1 {
-    font-size: 5.5em;
-    letter-spacing: .7em;
+    font-size: 3.5em;
 }
 
 .scoreboard {
-    border: 2px solid darkgray;
+    border: 1px solid #629ebb;
 }
 
 .scoreboard h6 {
@@ -28,7 +30,7 @@ body {
 
 .theme {
     color: #fff;
-    background-color: rgb(0, 117, 250);
+    background-color: #0075fa;
     padding: 8px;
     border-radius: 2px;
 }
@@ -39,4 +41,25 @@ ul {
 
 ul li {
     display: inline;
+}
+
+#you-won,
+#you-lost {
+    background-color: rgba(0, 137, 255, 0.43);
+    color: #fff;
+}
+
+/* ----- media queries ----- */
+
+/* tablets (landscape) and bigger */
+@media only screen and (min-width: 1000px) {
+    .display-4 {
+        font-size: 4.5em;
+        letter-spacing: .1em;
+    }
+
+    .jumbotron h1 {
+        font-size: 5.5em;
+        letter-spacing: .6em;
+    }
 }

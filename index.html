@@ -14,7 +14,7 @@
         <p>I'm thinking of a word.</p>
         <p>For every letter you guess correctly, I'll reveal where that letter is placed in the word.</p>
         <p>Do you think you can guess the word?</p>
-        <hr class="my-4">
+        <hr class="my-5">
         <p id="get-started">Click play to begin!</p>
         <p id="press-any-letter" style="display: none;">Press any letter to guess!</p>
         <p class="lead">
@@ -23,17 +23,19 @@
     </div>
 
     <!-- Current game -->
-    <div class="current-game" style="display: none;">
+    <div class="current-game mb-3" style="display: none;">
+    <section class="bg-image">   
     <div class="text-center letters-game">
         <h2 id="guess-the-word">Guess the Word:</h2>
-        <div class="already-pressed text-center font-italic"></div>
-        <h2 id="you-won" style="display: none;">You Guessed the Word!</h2>
-        <h2 id="you-lost" style="display: none;">Sorry, you're out of guesses!<br><br>The word was:</h2>
+        <div class="already-pressed text-center font-italic" style="display: none;"></div>
+        <h2 id="you-won" class="p-5" style="display: none;">You Guessed the Word!</h2>
+        <h2 id="you-lost" class="p-5" style="display: none;">Sorry, you're out of guesses!<br><br>The word was:</h2>
         <br>
         <br>
         <ul class="display-4 each-letter">
             <!-- Javascript goes here -->
         </ul>
+        <div class="hint text-center font-italic" style="display: none;"></div>
         <br>
         <br>
         <h5 class="font-italic theme-sentence">The Theme is . . .  
@@ -47,15 +49,16 @@
     <br>
     <br>
     <br>
-
+   
     <!-- Next Word Button -->
     <p class="text-center"><a id="second-word-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
     <p class="text-center"><a id="third-word-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
     <p class="text-center"><a id="final-score-button" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">FINAL SCORE</a></p>
-
+    </section>
+    
     <!-- Scoreboard -->
     <div class="container scoreboard">
-    <div class="row mb-4">
+    <div class="row">
         <!-- Keeps track of wins -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
             <h6>WINS</h6>

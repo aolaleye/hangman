@@ -32,6 +32,7 @@ function createListItems(ObjectName) {
     }
 }
 
+//gives the user a hint if the user has guessed less than 4 letters correctly and there are less than 7 remmaing guesses
 function giveHint(ObjectName) {
     if (remainingGuesses < 7 && currentWord.correctLetterGuesses.length < 4) {
         $(".hint").empty().append("Hint: " + words[ObjectName][3]).fadeIn("slow");
@@ -50,6 +51,8 @@ function ifUserWins(ObjectName) {
         $(".theme").hide();
         $(".hint").hide();
         $("#you-won").show();
+        //reveals image of current word
+        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
     }
 }
 
@@ -64,6 +67,7 @@ function ifUserLoses(ObjectName) {
         $(".hint").hide();
         $("#you-lost").show();
         $(".each-letter").empty().append(words[ObjectName][1]);
+        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
     }
 }
 
@@ -75,6 +79,7 @@ function resetGame() {
     $("#you-won").hide();
     $("#you-lost").hide();
     $(".hint").hide();
+    $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
     $("#press-any-letter").show();
     $("#guess-the-word").show();
     $(".theme-sentence").show();
@@ -283,6 +288,7 @@ $("#final-score-button").click(function() {
     $(".jumbotron p").hide();
     $(".letters-game").hide();
     $(".scoreboard").hide();
+    $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
     $(".final-score").show();
     if (wins === 0) {
         $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
@@ -293,6 +299,3 @@ $("#final-score-button").click(function() {
     }
 });
 
-// Extra time:
-// add hints - if remainingGuesses < x && currentWord.correctLetterGuesses < x, give hint
-// reveal image if userWon === true
