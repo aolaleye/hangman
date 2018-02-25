@@ -105,7 +105,7 @@ var keyCode = event.which;
 
 //(1) If the user presses a letter, then the letter appears in "already guessed" section (2) Subtracts 1 from remainingGuesses and prints remaining number
 function whenUserGuesses () {
-    if (currentWord.alreadyPressedLetters.includes(userKey)) {
+    if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
         $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
     } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
         $(".guessed-letters").append(userKey + " "); 
@@ -158,7 +158,7 @@ function gameTwo() {
         var keyCode = event.which;
         
         function whenUserGuesses () {
-            if (currentWord.alreadyPressedLetters.includes(userKey)) {
+            if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
                 $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
             } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
                 $(".guessed-letters").append(userKey + " "); 
@@ -213,7 +213,7 @@ function gameThree() {
         var keyCode = event.which;
         
         function whenUserGuesses () {
-            if (currentWord.alreadyPressedLetters.includes(userKey)) {
+            if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
                 $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
             } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
                 $(".guessed-letters").append(userKey + " "); 
