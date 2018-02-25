@@ -33,7 +33,7 @@ function createListItems(ObjectName) {
     }
 }
 
-//if user wins, add 1 to wins, reveal winning message, reveal button for next word; the parameter (number) = the number of non-repeated letters in the current word
+//if user wins, add 1 to wins, reveal winning message, reveal button for next word
 function ifUserWins(ObjectName) {
     if (currentWord.correctLetterGuesses.length === words[ObjectName][2] && userWon === false) {
         userWon = true;
@@ -49,7 +49,7 @@ function ifUserWins(ObjectName) {
 
 //if user loses, reveal the mystery word, reveal losing message, reveal button for next word
 function ifUserLoses(ObjectName) {
-    if (remainingGuesses === 0) {
+    if (remainingGuesses === 0 && userWon === false) {
         userLost = true;
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
