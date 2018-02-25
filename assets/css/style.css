@@ -6,6 +6,12 @@ body {
 .display-4 {
     font-family: 'Fredericka the Great', cursive;
     font-size: 4.5em;
+    letter-spacing: .2em;
+}
+
+.jumbotron h1 {
+    font-size: 5.5em;
+    letter-spacing: .7em;
 }
 
 .scoreboard {
