@@ -15,17 +15,20 @@
         <p>For every letter you guess correctly, I'll reveal where that letter is placed in the word.</p>
         <p>Do you think you can guess the word?</p>
         <hr class="my-4">
-        <p id="get-started">Click play and begin guessing letters!</p>
+        <p id="get-started">Click play to begin!</p>
+        <p id="press-any-letter" style="display: none;">Press any letter to guess!</p>
         <p class="lead">
-            <a id="play-1" class="btn btn-primary btn-lg play-button" href="#" role="button">PLAY</a>
-            <a id="play-2" class="btn btn-primary btn-lg play-button" style="display: none;" href="#" role="button">NEXT WORD</a>
+            <a id="play" class="btn btn-primary btn-lg play-button" href="#" role="button">PLAY</a>
         </p>
     </div>
 
     <!-- Current game -->
     <div class="current-game" style="display: none;">
     <div class="text-center">
-        <h2>Guess the Word:</h2>
+        <h2 id="guess-the-word">Guess the Word:</h2>
+        <div class="already-pressed text-center font-italic"></div>
+        <h2 id="you-won" style="display: none;">Great Job! You Guessed the Word!</h2>
+        <h2 id="you-lost" style="display: none;">Sorry, you're out of guesses!<br><br>The word was:</h2>
         <br>
         <br>
         <ul class="display-4 each-letter">
@@ -33,15 +36,19 @@
         </ul>
         <br>
         <br>
-        <h5 class="font-italic">The Theme is . . .  </h5>
-        <h5 class="theme">
-            <!-- Javascript goes here -->
+        <h5 class="font-italic theme-sentence">The Theme is . . .  
+            <h5 class="theme"><!-- Javascript goes here --></h5>
         </h5>
+        
     </div>
 
     <br>
     <br>
     <br>
+
+    <!-- Next Word Button -->
+    <p class="text-center"><a id="second-word" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
+    <p class="text-center"><a id="third-word" class="btn btn-primary btn-lg play-button mb-5" style="display: none;" href="#" role="button">NEXT WORD</a></p>
 
     <!-- Scoreboard -->
     <div class="container">
@@ -53,7 +60,7 @@
                 <!-- Javascript goes here -->
             </h1>
         </div>
-        <!-- Keeps track of number of guesses -->
+        <!-- Keeps track of remaining number of guesses -->
         <div class="col-sm-12 col-md-4 scoreboard text-center">
             <h6>NUMBER OF GUESSES REMAINING</h6>
             <h1 class="font-weight-bold remaining-guesses">
