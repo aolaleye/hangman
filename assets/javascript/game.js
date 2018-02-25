@@ -29,7 +29,7 @@ function createListItems(WordIndex) {
 
 //if user wins, add 1 to wins, reveal winning message, reveal button for next word
 function ifUserWins(number) {
-    if (currentWord.correctLetterGuesses.length === number) {
+    if (currentWord.correctLetterGuesses.length === number && userWon === false) {
         userWon = true;
         wins++;
         $(".wins").empty().append(wins);
@@ -79,9 +79,11 @@ function resetGame() {
    
 }
 
-// <----- GAME 1 ----->
 
-//Hides PLAY button and reveals game
+
+// <----- GAME 1 -----> 
+
+//hides PLAY button and reveals game
 $("#play").click(function(){
     $("#get-started").hide();
     $("#play").hide();
@@ -253,19 +255,23 @@ function gameThree() {
 
 $("#third-word-button").click(gameThree);
 
+
+// <----- FINAL SCORE ----->
+
 $("#final-score-button").click(function() {
     $("#final-score-button").hide();
+    $(".jumbotron p").hide();
     $(".letters-game").hide();
     $(".scoreboard").hide();
     $(".final-score").show();
     if (wins === 0) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Better Luck Next Time!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
     } else if (wins === 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Good Work!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Good Work!</h2>');
     } else if (wins > 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Awesome Job!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Awesome Job!</h2>');
     }
 });
 
-// fix bug - number of wins can increase after user wins
+// if you have extra time
 // refactor code to include words and themes arrays in currentWord object
