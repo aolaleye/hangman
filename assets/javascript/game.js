@@ -4,7 +4,7 @@
 var themes = ['Landscape', 'Outer Space', 'Instruments'];
 var words = ['mountain', 'galaxy', 'trombone'];
 var wins = 0;
-var remainingGuesses = 10;
+var remainingGuesses = 12;
 var userWon = false;
 var userLost = false;
 var currentWord = {
@@ -57,8 +57,8 @@ function ifUserLoses(WordIndex) {
 //resets scoreboard and previous game
 function resetGame() {
     //Hides next word button, hides winning or losing message
-    $("#second-word").hide();
-    $("#third-word").hide();    
+    $("#second-word-button").hide();
+    $("#third-word-button").hide();    
     $("#you-won").hide();
     $("#you-lost").hide();
     $("#press-any-letter").show();
@@ -68,7 +68,7 @@ function resetGame() {
     //Empties previous game 
     $(".each-letter").empty(); //<--- clears previous game
     $(".guessed-letters").empty(); //<--- clears list of guessed letters
-    remainingGuesses = 10; //<--- resets number of guesses to 15
+    remainingGuesses = 12; //<--- resets number of guesses to 15
     $(".remaining-guesses").empty().append(remainingGuesses); //<--- clears list of remaining guesses
     userWon = false;
     userLost = false;
@@ -137,7 +137,7 @@ ifUserWins(7);
 ifUserLoses(0);
 
 if (userWon === true || userLost === true) {
-    $("#second-word").show();
+    $("#second-word-button").show();
 }
 
 } //<--- end document.onkeyup function / end Game 1
@@ -188,14 +188,14 @@ function gameTwo() {
         ifUserLoses(1);
 
         if (userWon === true || userLost === true) {
-            $("#third-word").show();
+            $("#third-word-button").show();
         }
         
     } //<--- end document.onkeyup function
 
 } //<--- end gameTwo function
 
-$("#second-word").click(gameTwo); //<--- Upon clicking NEXT WORD button
+$("#second-word-button").click(gameTwo); //<--- Upon clicking NEXT WORD button
 
 
 
@@ -243,14 +243,29 @@ function gameThree() {
         
         ifUserLoses(2);
 
-        // if (userWon === true || userLost === true) {
-            
-        // }
+        if (userWon === true || userLost === true) {
+            $("#final-score-button").show();
+        }
         
     } //<--- end document.onkeyup function
 
 } //<--- end gameThree function
 
-$("#third-word").click(gameThree);
+$("#third-word-button").click(gameThree);
 
+$("#final-score-button").click(function() {
+    $("#final-score-button").hide();
+    $(".letters-game").hide();
+    $(".scoreboard").hide();
+    $(".final-score").show();
+    if (wins === 0) {
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Better Luck Next Time!</h2>');
+    } else if (wins === 1) {
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Good Work!</h2>');
+    } else if (wins > 1) {
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br>Awesome Job!</h2>');
+    }
+});
 
+// fix bug - number of wins can increase after user wins
+// refactor code to include words and themes arrays in currentWord object
