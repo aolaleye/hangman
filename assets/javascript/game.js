@@ -1,35 +1,41 @@
 
 // <----- Global Variables ----->
 
-var themes = ['Landscape', 'Outer Space', 'Instruments'];
-var words = ['mountain', 'galaxy', 'trombone'];
-var wins = 0;
-var remainingGuesses = 12;
-var userWon = false;
-var userLost = false;
+var words = {
+    //theme, word, number of nonrepeated letters, hint
+    word1: ['Landscape', 'mountain', 7, 'a large landform that stretches above the surrounding land, usually in the form of a peak'],
+    word2: ['Outer Space', 'galaxy', 5, 'a system of stars, interstellar gas, dust, and dark matter'],
+    word3: ['Intsruments', 'trombone', 7, 'a musical instrument in the brass family with an extendable slide']
+}
 var currentWord = {
     correctLetterGuesses: [], //array for user's correctly guessed letters
     alreadyPressedLetters: [] //array for the letters user has already pressed
 }
+var wins = 0;
+var remainingGuesses = 12;
+var userWon = false;
+var userLost = false;
+
+
 
 // <----- Global Functions ----->
 
 //reveals current theme 
-function revealTheme(Index) {
-    $(".theme").empty().append(themes[Index]);
+function revealTheme(ObjectName) {
+    $(".theme").empty().append(words[ObjectName][0]);
 }
 
 //creates a list item for each letter in the current word, assigns the list item an id that is the same number as the letter's index of the word, and inserts an underscore in each list item
-function createListItems(WordIndex) {
+function createListItems(ObjectName) {
     $(".each-letter").empty();
-    for (i = 0; i < words[WordIndex].length; i++) {
+    for (i = 0; i < words[ObjectName][1].length; i++) {
         $(".each-letter").append('<li id="' + i + '"> _ </li>');
     }
 }
 
-//if user wins, add 1 to wins, reveal winning message, reveal button for next word
-function ifUserWins(number) {
-    if (currentWord.correctLetterGuesses.length === number && userWon === false) {
+//if user wins, add 1 to wins, reveal winning message, reveal button for next word; the parameter (number) = the number of non-repeated letters in the current word
+function ifUserWins(ObjectName) {
+    if (currentWord.correctLetterGuesses.length === words[ObjectName][2] && userWon === false) {
         userWon = true;
         wins++;
         $(".wins").empty().append(wins);
@@ -42,7 +48,7 @@ function ifUserWins(number) {
 }
 
 //if user loses, reveal the mystery word, reveal losing message, reveal button for next word
-function ifUserLoses(WordIndex) {
+function ifUserLoses(ObjectName) {
     if (remainingGuesses === 0) {
         userLost = true;
         $("#press-any-letter").hide();
@@ -50,7 +56,7 @@ function ifUserLoses(WordIndex) {
         $(".theme-sentence").hide();
         $(".theme").hide();
         $("#you-lost").show();
-        $(".each-letter").empty().append(words[WordIndex]);
+        $(".each-letter").empty().append(words[ObjectName][1]);
     }
 }
 
@@ -85,8 +91,8 @@ function resetGame() {
 
 //hides PLAY button and reveals game
 $("#play").click(function(){
+    $(".jumbotron p").hide();
     $("#get-started").hide();
-    $("#play").hide();
     $("#press-any-letter").show();
     //Reveals game
     $(".current-game").show();
@@ -95,18 +101,18 @@ $("#play").click(function(){
     $(".remaining-guesses").append(remainingGuesses);
 }) 
 
-revealTheme(0); //<-- reveals theme 1    
-createListItems(0); //<--- creates list items for word 1 
+revealTheme("word1"); //<-- reveals theme 1    
+createListItems("word1"); //<--- creates list items for word 1 
     
 //<--- everything from this point is triggered by user's key press --->
 document.onkeyup = function(event) {
 var userKey = event.key;
 var keyCode = event.which;
 
-//(1) If the user presses a letter, then the letter appears in "already guessed" section (2) Subtracts 1 from remainingGuesses and prints remaining number
+//(1) If the user pressers a key that's already been pressed, a message appears (2) If the user presses a letter, then the letter appears in "already guessed" section (3) Subtract 1 from remainingGuesses and prints remaining number
 function whenUserGuesses () {
     if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
-        $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
+        $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut("slow");
     } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
         $(".guessed-letters").append(userKey + " "); 
         remainingGuesses -= 1;
@@ -117,26 +123,26 @@ function whenUserGuesses () {
 whenUserGuesses();
 
 //if the user's key equals the LetterIndex, then remove the underscore and reveal the correct letter
-function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
-    if (userKey === words[WordIndex][LetterIndex]) {
-        $("#" + LetterIndex + "").empty().append(" " + words[WordIndex][LetterIndex] + " ");
+function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
+    if (userKey === words[ObjectName][1][LetterIndex]) {
+        $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
         if (currentWord.correctLetterGuesses.includes(userKey) === false) {
         currentWord.correctLetterGuesses.push(userKey);
         }
     }
 }
-ifCorrectLetterGuessed(0,0);
-ifCorrectLetterGuessed(0,1);
-ifCorrectLetterGuessed(0,2);
-ifCorrectLetterGuessed(0,3);
-ifCorrectLetterGuessed(0,4);
-ifCorrectLetterGuessed(0,5);
-ifCorrectLetterGuessed(0,6);
-ifCorrectLetterGuessed(0,7);
+ifCorrectLetterGuessed("word1",0);
+ifCorrectLetterGuessed("word1",1);
+ifCorrectLetterGuessed("word1",2);
+ifCorrectLetterGuessed("word1",3);
+ifCorrectLetterGuessed("word1",4);
+ifCorrectLetterGuessed("word1",5);
+ifCorrectLetterGuessed("word1",6);
+ifCorrectLetterGuessed("word1",7);
 
-ifUserWins(7);
+ifUserWins("word1");
 
-ifUserLoses(0);
+ifUserLoses("word1");
 
 if (userWon === true || userLost === true) {
     $("#second-word-button").show();
@@ -150,8 +156,8 @@ if (userWon === true || userLost === true) {
 
 function gameTwo() {
     resetGame();
-    createListItems(1);
-    revealTheme(1);
+    createListItems("word2");
+    revealTheme("word2");
 
     document.onkeyup = function(event) {
         var userKey = event.key;
@@ -169,25 +175,25 @@ function gameTwo() {
         }
         whenUserGuesses();
         
-        function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
-            if (userKey === words[WordIndex][LetterIndex]) {
-                $("#" + LetterIndex + "").empty().append(" " + words[WordIndex][LetterIndex] + " ");
+        function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
+            if (userKey === words[ObjectName][1][LetterIndex]) {
+                $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
                 if (currentWord.correctLetterGuesses.includes(userKey) === false) {
                 currentWord.correctLetterGuesses.push(userKey);
                 }
             }
         }
-        ifCorrectLetterGuessed(1,0);
-        ifCorrectLetterGuessed(1,1);
-        ifCorrectLetterGuessed(1,2);
-        ifCorrectLetterGuessed(1,3);
-        ifCorrectLetterGuessed(1,4);
-        ifCorrectLetterGuessed(1,5);
-        ifCorrectLetterGuessed(1,6);
+        ifCorrectLetterGuessed("word2",0);
+        ifCorrectLetterGuessed("word2",1);
+        ifCorrectLetterGuessed("word2",2);
+        ifCorrectLetterGuessed("word2",3);
+        ifCorrectLetterGuessed("word2",4);
+        ifCorrectLetterGuessed("word2",5);
+        ifCorrectLetterGuessed("word2",6);
        
-        ifUserWins(5);
+        ifUserWins("word2");
         
-        ifUserLoses(1);
+        ifUserLoses("word2");
 
         if (userWon === true || userLost === true) {
             $("#third-word-button").show();
@@ -205,8 +211,8 @@ $("#second-word-button").click(gameTwo); //<--- Upon clicking NEXT WORD button
 
 function gameThree() {
     resetGame();
-    createListItems(2);
-    revealTheme(2);
+    createListItems("word3");
+    revealTheme("word3");
 
     document.onkeyup = function(event) {
         var userKey = event.key;
@@ -224,26 +230,26 @@ function gameThree() {
         }
         whenUserGuesses();
         
-        function ifCorrectLetterGuessed(WordIndex,LetterIndex) {
-            if (userKey === words[WordIndex][LetterIndex]) {
-                $("#" + LetterIndex + "").empty().append(" " + words[WordIndex][LetterIndex] + " ");
+        function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
+            if (userKey === words[ObjectName][1][LetterIndex]) {
+                $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
                 if (currentWord.correctLetterGuesses.includes(userKey) === false) {
                 currentWord.correctLetterGuesses.push(userKey);
                 }
             }
         }
-        ifCorrectLetterGuessed(2,0);
-        ifCorrectLetterGuessed(2,1);
-        ifCorrectLetterGuessed(2,2);
-        ifCorrectLetterGuessed(2,3);
-        ifCorrectLetterGuessed(2,4);
-        ifCorrectLetterGuessed(2,5);
-        ifCorrectLetterGuessed(2,6);
-        ifCorrectLetterGuessed(2,7);
+        ifCorrectLetterGuessed("word3",0);
+        ifCorrectLetterGuessed("word3",1);
+        ifCorrectLetterGuessed("word3",2);
+        ifCorrectLetterGuessed("word3",3);
+        ifCorrectLetterGuessed("word3",4);
+        ifCorrectLetterGuessed("word3",5);
+        ifCorrectLetterGuessed("word3",6);
+        ifCorrectLetterGuessed("word3",7);
         
-        ifUserWins(7);
+        ifUserWins("word3");
         
-        ifUserLoses(2);
+        ifUserLoses("word3");
 
         if (userWon === true || userLost === true) {
             $("#final-score-button").show();
@@ -265,13 +271,14 @@ $("#final-score-button").click(function() {
     $(".scoreboard").hide();
     $(".final-score").show();
     if (wins === 0) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
     } else if (wins === 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Good Work!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Good Work!</h2>');
     } else if (wins > 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + words.length + ' Times.<br><br><br>Awesome Job!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Awesome Job!</h2>');
     }
 });
 
-// if you have extra time
-// refactor code to include words and themes arrays in currentWord object
+// Extra time:
+// add hints - if remainingGuesses < x && currentWord.correctLetterGuesses < x, give hint
+// reveal image if userWon === true
