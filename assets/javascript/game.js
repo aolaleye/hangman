@@ -212,7 +212,6 @@ function gameTwo() {
         ifCorrectLetterGuessed("word2",3);
         ifCorrectLetterGuessed("word2",4);
         ifCorrectLetterGuessed("word2",5);
-        ifCorrectLetterGuessed("word2",6);
 
         giveHint("word2");
        
@@ -299,11 +298,11 @@ $("#final-score-button").click(function() {
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
     $(".final-score").show();
     if (wins === 0) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Better Luck Next Time!</h2>');
     } else if (wins === 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Good Effort!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Good Effort!</h2>');
     } else if (wins > 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Awesome Job!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Awesome Job!</h2>');
     }
 });
 
