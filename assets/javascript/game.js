@@ -22,32 +22,32 @@ var needsHint = false;
 // <----- Global Functions ----->
 
 //reveals current theme 
-function revealTheme(ObjectName) {
-    $(".theme").empty().append(words[ObjectName][0]);
+function revealTheme(ObjectKey) {
+    $(".theme").empty().append(words[ObjectKey][0]);
 }
 
 //creates a list item for each letter in the current word, assigns the list item an id that is the same number as the letter's index of the word, and inserts an underscore in each list item
-function createListItems(ObjectName) {
-    for (i = 0; i < words[ObjectName][1].length; i++) {
+function createListItems(ObjectKey) {
+    for (i = 0; i < words[ObjectKey][1].length; i++) {
         $(".each-letter").append('<li id="' + i + '"> _ </li>');
     }
 }
 
 //gives the user a hint if the user has guessed less than 4 letters correctly and there are less than 7 remmaing guesses
-function giveHint(ObjectName) {
+function giveHint(ObjectKey) {
     if (remainingGuesses < 7 && currentWord.correctLetterGuesses.length < 4 && needsHint === false) {
         needsHint = true;
         $("#hint-button").fadeIn("slow");
     } 
     $("#hint-button").click(function(){
         $("#hint-button").hide();
-        $(".hint").empty().append(words[ObjectName][3]).fadeIn("slow");
+        $(".hint").empty().append(words[ObjectKey][3]).fadeIn("slow");
     }) 
 }
 
 //if user wins, add 1 to wins, reveal winning message, reveal button for next word
-function ifUserWins(ObjectName) {
-    if (currentWord.correctLetterGuesses.length === words[ObjectName][2] && userWon === false) {
+function ifUserWins(ObjectKey) {
+    if (currentWord.correctLetterGuesses.length === words[ObjectKey][2] && userWon === false) {
         userWon = true;
         wins++;
         $(".wins").empty().append(wins);
@@ -59,12 +59,12 @@ function ifUserWins(ObjectName) {
         $(".hint").empty().hide();
         $("#you-won").show();
         //reveals image of current word
-        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
+        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectKey][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
     }
 }
 
 //if user loses, reveal the mystery word, reveal losing message, reveal button for next word
-function ifUserLoses(ObjectName) {
+function ifUserLoses(ObjectKey) {
     if (remainingGuesses === 0 && userWon === false) {
         userLost = true;
         $("#press-any-letter").hide();
@@ -74,8 +74,8 @@ function ifUserLoses(ObjectName) {
         $("#hint-button").hide();
         $(".hint").empty().hide();
         $("#you-lost").show();
-        $(".each-letter").empty().append(words[ObjectName][1]);
-        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
+        $(".each-letter").empty().append(words[ObjectKey][1]);
+        $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectKey][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
     }
 }
 
@@ -143,23 +143,18 @@ function whenUserGuesses () {
 }
 whenUserGuesses();
 
-//if the user's key equals the LetterIndex of the current word, then remove the underscore and reveal that letter
-function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
-    if (userKey === words[ObjectName][1][LetterIndex]) {
-        $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
-        if (currentWord.correctLetterGuesses.includes(userKey) === false) {
-        currentWord.correctLetterGuesses.push(userKey);
+//for each letter of the current word, if the user's key equals the LetterIndex of the current word, then remove the underscore and reveal that letter
+function ifCorrectLetterGuessed(ObjectKey) {
+    for (i = 0; i < words[ObjectKey][2] + 1; i++) {
+        if (userKey === words[ObjectKey][1][i]) {
+            $("#" + i + "").empty().append(" " + words[ObjectKey][1][i] + " ");
+            if (currentWord.correctLetterGuesses.includes(userKey) === false) {
+            currentWord.correctLetterGuesses.push(userKey);
+            }
         }
     }
 }
-ifCorrectLetterGuessed("word1",0);
-ifCorrectLetterGuessed("word1",1);
-ifCorrectLetterGuessed("word1",2);
-ifCorrectLetterGuessed("word1",3);
-ifCorrectLetterGuessed("word1",4);
-ifCorrectLetterGuessed("word1",5);
-ifCorrectLetterGuessed("word1",6);
-ifCorrectLetterGuessed("word1",7);
+ifCorrectLetterGuessed("word1");
 
 giveHint("word1");
 
@@ -175,7 +170,7 @@ if (userWon === true || userLost === true) {
 
 
 
-// <----- GAME 2 ----->
+// // <----- GAME 2 ----->
 
 function gameTwo() {
     resetGame();
@@ -198,20 +193,17 @@ function gameTwo() {
         }
         whenUserGuesses();
         
-        function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
-            if (userKey === words[ObjectName][1][LetterIndex]) {
-                $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
-                if (currentWord.correctLetterGuesses.includes(userKey) === false) {
-                currentWord.correctLetterGuesses.push(userKey);
+        function ifCorrectLetterGuessed(ObjectKey) {
+            for (i = 0; i < words[ObjectKey][2] + 1; i++) {
+                if (userKey === words[ObjectKey][1][i]) {
+                    $("#" + i + "").empty().append(" " + words[ObjectKey][1][i] + " ");
+                    if (currentWord.correctLetterGuesses.includes(userKey) === false) {
+                    currentWord.correctLetterGuesses.push(userKey);
+                    }
                 }
             }
         }
-        ifCorrectLetterGuessed("word2",0);
-        ifCorrectLetterGuessed("word2",1);
-        ifCorrectLetterGuessed("word2",2);
-        ifCorrectLetterGuessed("word2",3);
-        ifCorrectLetterGuessed("word2",4);
-        ifCorrectLetterGuessed("word2",5);
+        ifCorrectLetterGuessed("word2");
 
         giveHint("word2");
        
@@ -254,22 +246,17 @@ function gameThree() {
         }
         whenUserGuesses();
         
-        function ifCorrectLetterGuessed(ObjectName,LetterIndex) {
-            if (userKey === words[ObjectName][1][LetterIndex]) {
-                $("#" + LetterIndex + "").empty().append(" " + words[ObjectName][1][LetterIndex] + " ");
-                if (currentWord.correctLetterGuesses.includes(userKey) === false) {
-                currentWord.correctLetterGuesses.push(userKey);
+        function ifCorrectLetterGuessed(ObjectKey) {
+            for (i = 0; i < words[ObjectKey][2] + 1; i++) {
+                if (userKey === words[ObjectKey][1][i]) {
+                    $("#" + i + "").empty().append(" " + words[ObjectKey][1][i] + " ");
+                    if (currentWord.correctLetterGuesses.includes(userKey) === false) {
+                    currentWord.correctLetterGuesses.push(userKey);
+                    }
                 }
             }
         }
-        ifCorrectLetterGuessed("word3",0);
-        ifCorrectLetterGuessed("word3",1);
-        ifCorrectLetterGuessed("word3",2);
-        ifCorrectLetterGuessed("word3",3);
-        ifCorrectLetterGuessed("word3",4);
-        ifCorrectLetterGuessed("word3",5);
-        ifCorrectLetterGuessed("word3",6);
-        ifCorrectLetterGuessed("word3",7);
+        ifCorrectLetterGuessed("word3");
 
         giveHint("word3");
         
