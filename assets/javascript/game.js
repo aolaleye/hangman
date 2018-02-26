@@ -3,9 +3,9 @@
 
 var words = {
     //theme, word, number of nonrepeated letters, hint
-    word1: ['Landscape', 'mountain', 7, 'a large landform that stretches above surrounding land - usually in the form of a peak'],
-    word2: ['Outer Space', 'galaxy', 5, 'a system of stars, interstellar gas, dust, and dark matter'],
-    word3: ['Intsruments', 'trombone', 7, 'a musical instrument in the brass family with an extendable slide']
+    word1: ['Landscape', 'mountain', 7, 'A large landform that stretches above surrounding land - usually in the form of a peak'],
+    word2: ['Outer Space', 'galaxy', 5, 'A system of stars, interstellar gas, dust, and dark matter'],
+    word3: ['Intsruments', 'trombone', 7, 'A musical instrument in the brass family with an extendable slide']
 }
 var currentWord = {
     correctLetterGuesses: [], //array for user's correctly guessed letters
@@ -41,7 +41,7 @@ function giveHint(ObjectName) {
     } 
     $("#hint-button").click(function(){
         $("#hint-button").hide();
-        $(".hint").empty().append("Hint: " + words[ObjectName][3]).fadeIn("slow");
+        $(".hint").empty().append(words[ObjectName][3]).fadeIn("slow");
     }) 
 }
 
@@ -55,6 +55,7 @@ function ifUserWins(ObjectName) {
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
         $(".theme").hide();
+        $("#hint-button").hide();
         $(".hint").empty().hide();
         $("#you-won").show();
         //reveals image of current word
@@ -70,7 +71,8 @@ function ifUserLoses(ObjectName) {
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
         $(".theme").hide();
-        $(".hint").hide();
+        $("#hint-button").hide();
+        $(".hint").empty().hide();
         $("#you-lost").show();
         $(".each-letter").empty().append(words[ObjectName][1]);
         $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectName][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
@@ -84,7 +86,6 @@ function resetGame() {
     $("#third-word-button").hide();    
     $("#you-won").hide();
     $("#you-lost").hide();
-    $(".hint").hide();
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
     $("#press-any-letter").show();
     $("#guess-the-word").show();
@@ -300,7 +301,7 @@ $("#final-score-button").click(function() {
     if (wins === 0) {
         $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Better Luck Next Time!</h2>');
     } else if (wins === 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Good Work!</h2>');
+        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Good Effort!</h2>');
     } else if (wins > 1) {
         $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br><br>Awesome Job!</h2>');
     }
