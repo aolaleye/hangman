@@ -8,6 +8,18 @@ body {
     font-size: 2.5em;
 }
 
+#get-started,
+#press-any-letter,
+.hint,
+#hint-button,
+.already-pressed {
+    font-family: 'Averia Serif Libre', cursive;
+}
+
+.hint {
+    color: #b74400;
+}
+
 .jumbotron {
     padding-bottom: 0;
 }
@@ -45,8 +57,14 @@ ul li {
 
 #you-won,
 #you-lost {
-    background-color: rgba(0, 137, 255, 0.43);
+    background-color: rgba(173, 197, 218, 0.64);
     color: #fff;
+}
+
+#second-word-button,
+#third-word-button,
+#final-score-button {
+    border: 1px dashed #fff;
 }
 
 /* ----- media queries ----- */
