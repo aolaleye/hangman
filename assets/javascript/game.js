@@ -110,6 +110,12 @@ function resetGame() {
    
 }
 
+//checks if user is on a touch screen device
+window.addEventListener('touchstart', function detectScreenType() {
+    isTouchScreen = true;
+    window.removeEventListener('touchstart', detectScreenType)
+});
+
 
 
 // <----- GAME 1 -----> 
@@ -118,25 +124,18 @@ function resetGame() {
 $("#play").click(function(){
     $(".jumbotron p").hide();
     $("#get-started").hide();
-    $(".keyboard").show();
     $("#press-any-letter").show();
     //Reveals game
     $(".current-game").show();
     //displays intital number of wins and remaining guesses
     $(".wins").append(wins);
     $(".remaining-guesses").append(remainingGuesses);
+    //if user is on a touch screen device, then append a button to the .keyboard div that will pull up a touch keyboard
+    if (isTouchScreen === true) {
+        $(".keyboard").append('<div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById("keyboard-button").focus();">');
+        $(".keyboard").show();
+    }
 }) 
-
-window.addEventListener('touchstart', function detectScreenType() {
-    isTouchScreen = true;
-});
-    // we only need to know once that a human touched the screen, so we can stop listening now
-//     window.removeEventListener('touchstart', detectScreenType, false);
-//   }, false);
-
-if (isTouchScreen === true) {
-    $(".jumbotron").append('<div class="keyboard"><div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById("keyboard-button").focus();"></div>');
-}  
 
 revealTheme("word1"); //<-- reveals theme 1    
 createListItems("word1"); //<--- creates list items for word 1 
