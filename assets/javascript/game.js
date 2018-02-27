@@ -25,6 +25,14 @@ var isTouchScreen = false;
 //reveals current theme 
 function revealTheme(ObjectKey) {
     $(".theme").empty().append(words[ObjectKey][0]);
+    function randomColor(){
+        var r = Math.floor(Math.random() * (200));
+        var g = Math.floor(Math.random() * (200));
+        var b = Math.floor(Math.random() * (200));
+        var rgbColor = 'rgb(' + r + ','+ g + ',' + b + ')'; 
+        $('.theme').css('background-color', rgbColor);
+       }
+    randomColor();
 }
 
 //creates a list item for each letter in the current word, assigns the list item an id that is the same number as the letter's index of the word, and inserts an underscore in each list item
