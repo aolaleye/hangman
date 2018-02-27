@@ -170,7 +170,7 @@ if (userWon === true || userLost === true) {
 
 
 
-// // <----- GAME 2 ----->
+// <----- GAME 2 ----->
 
 function gameTwo() {
     resetGame();
@@ -273,6 +273,7 @@ function gameThree() {
 } //<--- end gameThree function
 
 $("#third-word-button").click(gameThree);
+
 
 
 // <----- FINAL SCORE ----->
