@@ -83,8 +83,8 @@ ul li {
 }
 
 /* laptops and bigger */
-@media only screen and (min-width: 1400px) {
-    #keyboard-button {
+/* @media only screen and (min-width: 1400px) {
+    .keyboard {
         display: none;
     }
-}
+} */
