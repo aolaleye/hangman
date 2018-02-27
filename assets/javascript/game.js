@@ -5,7 +5,7 @@ var words = {
     //theme, word, number of nonrepeated letters, hint
     word1: ['Landscape', 'mountain', 7, 'A large landform that stretches above surrounding land - usually in the form of a peak'],
     word2: ['Outer Space', 'galaxy', 5, 'A system of stars, interstellar gas, dust, and dark matter'],
-    word3: ['Intsruments', 'trombone', 7, 'A musical instrument in the brass family with an extendable slide']
+    word3: ['Instruments', 'trombone', 7, 'A musical instrument in the brass family with an extendable slide']
 }
 var currentWord = {
     correctLetterGuesses: [], //array for user's correctly guessed letters
@@ -55,7 +55,8 @@ function giveHint(ObjectKey) {
 }
 
 //if user wins, add 1 to wins, reveal winning message, reveal button for next word
-function ifUserWins(ObjectKey) {
+//if user loses, reveal the mystery word, reveal losing message, reveal button for next word
+function ifUserWinsOrLoses(ObjectKey, ButtonName) {
     if (currentWord.correctLetterGuesses.length === words[ObjectKey][2] && userWon === false) {
         userWon = true;
         wins++;
@@ -68,14 +69,10 @@ function ifUserWins(ObjectKey) {
         $("#hint-button").hide();
         $(".hint").empty().hide();
         $("#you-won").show();
+        $(ButtonName).show();
         //reveals image of current word
         $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectKey][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
-    }
-}
-
-//if user loses, reveal the mystery word, reveal losing message, reveal button for next word
-function ifUserLoses(ObjectKey) {
-    if (remainingGuesses === 0 && userWon === false) {
+    } else if (remainingGuesses === 0 && userWon === false) {
         userLost = true;
         $(".keyboard").hide();
         $("#press-any-letter").hide();
@@ -86,6 +83,7 @@ function ifUserLoses(ObjectKey) {
         $(".hint").empty().hide();
         $("#you-lost").show();
         $(".each-letter").empty().append(words[ObjectKey][1]);
+        $(ButtonName).show();
         $(".bg-image").css("background", "#e9ecef url(assets/images/" + words[ObjectKey][1] + ".jpg) no-repeat center").css("background-size", "cover").css("box-shadow", "inset 0px 0px 20px 0px #3e3e3e");
     }
 }
@@ -93,8 +91,7 @@ function ifUserLoses(ObjectKey) {
 //resets scoreboard and previous game
 function resetGame() {
     //Hides next word button, hides winning or losing message
-    $("#second-word-button").hide();
-    $("#third-word-button").hide();    
+    $(".next-button").hide();    
     $("#you-won").hide();
     $("#you-lost").hide();
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
@@ -181,13 +178,7 @@ ifCorrectLetterGuessed("word1");
 
 giveHint("word1");
 
-ifUserWins("word1");
-
-ifUserLoses("word1");
-
-if (userWon === true || userLost === true) {
-    $("#second-word-button").show();
-}
+ifUserWinsOrLoses("word1", "#second-word-button");
 
 } //<--- end document.onkeyup function / end Game 1
 
@@ -230,13 +221,7 @@ function gameTwo() {
 
         giveHint("word2");
        
-        ifUserWins("word2");
-        
-        ifUserLoses("word2");
-
-        if (userWon === true || userLost === true) {
-            $("#third-word-button").show();
-        }
+        ifUserWinsOrLoses("word2", "#third-word-button");
         
     } //<--- end document.onkeyup function
 
@@ -283,13 +268,7 @@ function gameThree() {
 
         giveHint("word3");
         
-        ifUserWins("word3");
-        
-        ifUserLoses("word3");
-
-        if (userWon === true || userLost === true) {
-            $("#final-score-button").show();
-        }
+        ifUserWinsOrLoses("word3", "#final-score-button");
         
     } //<--- end document.onkeyup function
 
@@ -302,7 +281,7 @@ $("#third-word-button").click(gameThree);
 // <----- FINAL SCORE ----->
 
 $("#final-score-button").click(function() {
-    $("#final-score-button").hide();
+    $(".next-button").hide();
     $(".jumbotron p").hide();
     $(".letters-game").hide();
     $(".scoreboard").hide();
