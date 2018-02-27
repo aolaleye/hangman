@@ -17,40 +17,40 @@
         <hr class="my-5">
 
         <!-- Mobile feature -->
-        <div class="keyboard mb-5" style="display: none;">
+        <div class="keyboard mb-5 hidden">
             <!-- If JavaScript detects a touch screen device, a button will be inserted here for the user to pull up a touch keyboard  -->
         </div>
         <!-- end mobile feature -->
 
         <p id="get-started">Click play to begin!</p>
-        <p id="press-any-letter" style="display: none;">Press any letter to guess!</p>
+        <p id="press-any-letter" class="hidden">Press any letter to guess!</p>
         <p class="lead">
             <a id="play" class="btn btn-primary btn-lg play-button mt-4 px-5" href="#" role="button">PLAY</a>
         </p>
     </div>
 
     <!-- Current game -->
-    <div class="current-game mb-3" style="display: none;">
+    <div class="current-game mb-3 hidden">
     <section class="bg-image">   
     <div class="text-center letters-game">
         <h2 id="guess-the-word">Guess the Word:</h2>
-        <div class="already-pressed text-center font-italic" style="display: none;"></div>
-        <h2 id="you-won" class="p-5" style="display: none;">You Guessed the Word!</h2>
-        <h2 id="you-lost" class="p-5" style="display: none;">Sorry, you're out of guesses!<br><br>The word was:</h2>
+        <div class="already-pressed text-center font-italic hidden"></div>
+        <h2 id="you-won" class="p-5 hidden">You Guessed the Word!</h2>
+        <h2 id="you-lost" class="p-5 hidden">Sorry, you're out of guesses!<br><br>The word was:</h2>
         <br>
         <br>
         <ul class="display-4 each-letter">
             <!-- Javascript goes here -->
         </ul>
-        <div class="hint text-center mt-2" style="display: none;"></div>
+        <div class="hint text-center mt-2 hidden"></div>
         <br>
-        <p class="text-center"><a id="hint-button" class="btn btn-warning btn-lg play-button mb-2" style="display: none;" href="#" role="button">HINT?</a></p>
+        <p class="text-center"><a id="hint-button" class="btn btn-warning btn-lg play-button mb-2 hidden" href="#" role="button">HINT?</a></p>
         <br>
         <h5 class="font-italic theme-sentence">The Theme is . . .  
             <h5 class="theme"><!-- Javascript goes here --></h5>
         </h5>
     </div>
-    <div class="text-center final-score" style="display: none;">
+    <div class="text-center final-score hidden">
         <!-- Javascript goes here -->
     </div>
 
@@ -68,21 +68,21 @@
     <div class="container scoreboard">
     <div class="row">
         <!-- Keeps track of wins -->
-        <div class="col-sm-12 col-md-4 scoreboard text-center">
+        <div class="col-sm-12 col-md-4 text-center">
             <h6>WINS</h6>
             <h1 class="font-weight-bold wins">
                 <!-- Javascript goes here -->
             </h1>
         </div>
         <!-- Keeps track of remaining number of guesses -->
-        <div class="col-sm-12 col-md-4 scoreboard text-center">
+        <div class="col-sm-12 col-md-4 text-center">
             <h6>NUMBER OF GUESSES REMAINING</h6>
             <h1 class="font-weight-bold remaining-guesses">
                 <!-- Javascript goes here -->
             </h1>
         </div>
         <!-- Keeps track of letters already guessed -->
-        <div class="col-sm-12 col-md-4 scoreboard text-center">
+        <div class="col-sm-12 col-md-4 text-center">
             <h6>LETTERS ALREADY GUESSED</h6>
             <h1 class="font-weight-bold guessed-letters">
                 <!-- Javascript goes here -->
