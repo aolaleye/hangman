@@ -16,6 +16,7 @@ var remainingGuesses = 12;
 var userWon = false;
 var userLost = false;
 var needsHint = false;
+var isTouchScreen = false;
 
 
 
@@ -51,7 +52,7 @@ function ifUserWins(ObjectKey) {
         userWon = true;
         wins++;
         $(".wins").empty().append(wins);
-        $("#keyboard-button input").hide();
+        $(".keyboard").hide();
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
@@ -68,7 +69,7 @@ function ifUserWins(ObjectKey) {
 function ifUserLoses(ObjectKey) {
     if (remainingGuesses === 0 && userWon === false) {
         userLost = true;
-        $("#keyboard-button input").hide();
+        $(".keyboard").hide();
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
@@ -89,7 +90,7 @@ function resetGame() {
     $("#you-won").hide();
     $("#you-lost").hide();
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
-    $("#keyboard-button input").show();
+    $(".keyboard").show();
     $("#press-any-letter").show();
     $("#guess-the-word").show();
     $(".theme-sentence").show();
@@ -117,7 +118,7 @@ function resetGame() {
 $("#play").click(function(){
     $(".jumbotron p").hide();
     $("#get-started").hide();
-    $("#keyboard-button input").show();
+    $(".keyboard").show();
     $("#press-any-letter").show();
     //Reveals game
     $(".current-game").show();
@@ -125,6 +126,17 @@ $("#play").click(function(){
     $(".wins").append(wins);
     $(".remaining-guesses").append(remainingGuesses);
 }) 
+
+window.addEventListener('touchstart', function detectScreenType() {
+    isTouchScreen = true;
+  
+    // we only need to know once that a human touched the screen, so we can stop listening now
+    window.removeEventListener('touchstart', detectScreenType, false);
+  }, false);
+
+if (isTouchScreen === true) {
+    $(".jumbotron").append('<div class="keyboard"><div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById("keyboard-button").focus();"></div>');
+}  
 
 revealTheme("word1"); //<-- reveals theme 1    
 createListItems("word1"); //<--- creates list items for word 1 
