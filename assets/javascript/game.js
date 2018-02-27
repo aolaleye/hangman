@@ -51,6 +51,7 @@ function ifUserWins(ObjectKey) {
         userWon = true;
         wins++;
         $(".wins").empty().append(wins);
+        $("#keyboard-button").hide();
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
@@ -67,6 +68,7 @@ function ifUserWins(ObjectKey) {
 function ifUserLoses(ObjectKey) {
     if (remainingGuesses === 0 && userWon === false) {
         userLost = true;
+        $("#keyboard-button").hide();
         $("#press-any-letter").hide();
         $("#guess-the-word").hide();
         $(".theme-sentence").hide();
@@ -87,6 +89,7 @@ function resetGame() {
     $("#you-won").hide();
     $("#you-lost").hide();
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
+    $("#keyboard-button").show();
     $("#press-any-letter").show();
     $("#guess-the-word").show();
     $(".theme-sentence").show();
@@ -114,6 +117,7 @@ function resetGame() {
 $("#play").click(function(){
     $(".jumbotron p").hide();
     $("#get-started").hide();
+    $("#keyboard-button").show();
     $("#press-any-letter").show();
     //Reveals game
     $(".current-game").show();
