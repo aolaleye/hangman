@@ -132,7 +132,7 @@ $("#play").click(function(){
     $(".remaining-guesses").append(remainingGuesses);
     //if user is on a touch screen device, then append a button to the .keyboard div that will pull up a touch keyboard
     if (isTouchScreen === true) {
-        $(".keyboard").append('<div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById("keyboard-button").focus();">');
+        $(".keyboard").append('<div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById(\'keyboard-button\').focus();">');
         $(".keyboard").show();
     }
 }) 
