@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 body {
     font-family: 'Julius Sans One', sans-serif;
     background-color: #e9ecef;
@@ -28,8 +32,8 @@ body {
     font-size: 3.5em;
 }
 
-.scoreboard {
-    border: 1px solid #629ebb;
+.scoreboard .text-center{
+    border: 2px solid #545454;
 }
 
 .scoreboard h6 {
@@ -42,7 +46,6 @@ body {
 
 .theme {
     color: #fff;
-    background-color: #0075fa;
     padding: 8px;
     border-radius: 2px;
 }
@@ -64,7 +67,7 @@ ul li {
 #second-word-button,
 #third-word-button,
 #final-score-button {
-    border: 1px dashed #fff;
+    border: 6px double #fff;
 }
 
 /* ----- media queries ----- */
