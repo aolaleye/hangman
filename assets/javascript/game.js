@@ -129,10 +129,10 @@ $("#play").click(function(){
 
 window.addEventListener('touchstart', function detectScreenType() {
     isTouchScreen = true;
-  
+});
     // we only need to know once that a human touched the screen, so we can stop listening now
-    window.removeEventListener('touchstart', detectScreenType, false);
-  }, false);
+//     window.removeEventListener('touchstart', detectScreenType, false);
+//   }, false);
 
 if (isTouchScreen === true) {
     $(".jumbotron").append('<div class="keyboard"><div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px"><input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off"></div><input type="button" value="Click for Keyboard" onclick="document.getElementById("keyboard-button").focus();"></div>');
