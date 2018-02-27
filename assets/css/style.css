@@ -81,10 +81,3 @@ ul li {
         letter-spacing: .6em;
     }
 }
-
-/* laptops and bigger */
-/* @media only screen and (min-width: 1400px) {
-    .keyboard {
-        display: none;
-    }
-} */
