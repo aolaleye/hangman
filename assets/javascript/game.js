@@ -5,7 +5,9 @@ var words = {
     //theme, word, number of nonrepeated letters, hint
     word1: ['Landscape', 'mountain', 7, 'A large landform that stretches above surrounding land - usually in the form of a peak'],
     word2: ['Outer Space', 'galaxy', 5, 'A system of stars, interstellar gas, dust, and dark matter'],
-    word3: ['Instruments', 'trombone', 7, 'A musical instrument in the brass family with an extendable slide']
+    word3: ['Instruments', 'trombone', 7, 'A musical instrument in the brass family with an extendable slide'],
+    word4: ['Ocean', 'iceberg', 6, 'It took down the Titanic'],
+    word5: ['Weather', 'tornado', 6, 'Rapidly rotating column of air - also referred to as a twister, whirlwind, or cyclone']
 }
 var currentWord = {
     correctLetterGuesses: [], //array for user's correctly guessed letters
@@ -54,8 +56,8 @@ function giveHint(ObjectKey) {
     }) 
 }
 
-//if user wins, add 1 to wins, reveal winning message, reveal button for next word
-//if user loses, reveal the mystery word, reveal losing message, reveal button for next word
+//if user wins, add 1 to wins, reveal winning message, reveal image of the word, reveal button for next word
+//if user loses, reveal the mystery word, reveal losing message, reveal image of the word, reveal button for next word
 function ifUserWinsOrLoses(ObjectKey, ButtonName) {
     if (currentWord.correctLetterGuesses.length === words[ObjectKey][2] && userWon === false) {
         userWon = true;
@@ -142,7 +144,8 @@ $("#play").click(function(){
     }
 }) 
 
-revealTheme("word1"); //<-- reveals theme 1    
+revealTheme("word1"); //<-- reveals theme 1   
+
 createListItems("word1"); //<--- creates list items for word 1 
     
 //<--- everything from this point is triggered by user's key press --->
@@ -268,13 +271,107 @@ function gameThree() {
 
         giveHint("word3");
         
-        ifUserWinsOrLoses("word3", "#final-score-button");
+        ifUserWinsOrLoses("word3", "#fourth-word-button");
         
     } //<--- end document.onkeyup function
 
 } //<--- end gameThree function
 
 $("#third-word-button").click(gameThree);
+
+
+
+// <----- GAME 4 ----->
+
+function gameFour() {
+    resetGame();
+    createListItems("word4");
+    revealTheme("word4");
+
+    document.onkeyup = function(event) {
+        var userKey = event.key;
+        var keyCode = event.which;
+        
+        function whenUserGuesses () {
+            if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
+                $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
+            } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
+                $(".guessed-letters").append(userKey + " "); 
+                remainingGuesses -= 1;
+                $(".remaining-guesses").empty().append(remainingGuesses);
+                currentWord.alreadyPressedLetters.push(userKey);
+            } 
+        }
+        whenUserGuesses();
+        
+        function ifCorrectLetterGuessed(ObjectKey) {
+            for (i = 0; i < words[ObjectKey][2] + 1; i++) {
+                if (userKey === words[ObjectKey][1][i]) {
+                    $("#" + i + "").empty().append(" " + words[ObjectKey][1][i] + " ");
+                    if (currentWord.correctLetterGuesses.includes(userKey) === false) {
+                    currentWord.correctLetterGuesses.push(userKey);
+                    }
+                }
+            }
+        }
+        ifCorrectLetterGuessed("word4");
+
+        giveHint("word4");
+        
+        ifUserWinsOrLoses("word4", "#fifth-word-button");
+        
+    } //<--- end document.onkeyup function
+
+} //<--- end gameThree function
+
+$("#fourth-word-button").click(gameFour);
+
+
+
+// <----- GAME 5 ----->
+
+function gameFive() {
+    resetGame();
+    createListItems("word5");
+    revealTheme("word5");
+
+    document.onkeyup = function(event) {
+        var userKey = event.key;
+        var keyCode = event.which;
+        
+        function whenUserGuesses () {
+            if (currentWord.alreadyPressedLetters.includes(userKey) && userWon === false && userLost === false) {
+                $(".already-pressed").empty().append('You already guessed "' + userKey + '"').fadeIn("slow").fadeOut();
+            } else if (keyCode > 64 && keyCode < 91 && remainingGuesses > 0 && userWon === false) {
+                $(".guessed-letters").append(userKey + " "); 
+                remainingGuesses -= 1;
+                $(".remaining-guesses").empty().append(remainingGuesses);
+                currentWord.alreadyPressedLetters.push(userKey);
+            } 
+        }
+        whenUserGuesses();
+        
+        function ifCorrectLetterGuessed(ObjectKey) {
+            for (i = 0; i < words[ObjectKey][2] + 1; i++) {
+                if (userKey === words[ObjectKey][1][i]) {
+                    $("#" + i + "").empty().append(" " + words[ObjectKey][1][i] + " ");
+                    if (currentWord.correctLetterGuesses.includes(userKey) === false) {
+                    currentWord.correctLetterGuesses.push(userKey);
+                    }
+                }
+            }
+        }
+        ifCorrectLetterGuessed("word5");
+
+        giveHint("word5");
+        
+        ifUserWinsOrLoses("word5", "#final-score-button");
+        
+    } //<--- end document.onkeyup function
+
+} //<--- end gameThree function
+
+$("#fifth-word-button").click(gameFive);
 
 
 
