@@ -32,8 +32,13 @@ body {
     font-size: 3.5em;
 }
 
-.scoreboard .text-center{
+.scoreboard {
     border: 2px solid #545454;
+}
+
+.scoreboard .text-center {
+    border: 2px solid #545454;
+    min-height: 88px;
 }
 
 .scoreboard h6 {
