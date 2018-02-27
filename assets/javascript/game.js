@@ -114,7 +114,6 @@ function resetGame() {
         correctLetterGuesses: [],
         alreadyPressedLetters: []
     } //<--- resets/empties correctLetterGuesses and alreadyPressedLetters arrays
-   
 }
 
 //checks if user is on a touch screen device
@@ -322,7 +321,7 @@ function gameFour() {
         
     } //<--- end document.onkeyup function
 
-} //<--- end gameThree function
+} //<--- end gameFour function
 
 $("#fourth-word-button").click(gameFour);
 
@@ -369,7 +368,7 @@ function gameFive() {
         
     } //<--- end document.onkeyup function
 
-} //<--- end gameThree function
+} //<--- end gameFive function
 
 $("#fifth-word-button").click(gameFive);
 
