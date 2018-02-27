@@ -69,9 +69,7 @@ ul li {
     color: #fff;
 }
 
-#second-word-button,
-#third-word-button,
-#final-score-button {
+.next-button {
     border: 6px double #fff;
 }
 
