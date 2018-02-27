@@ -15,15 +15,19 @@
         <p>For every letter you guess correctly, I'll reveal where that letter is placed in the word.</p>
         <p>Do you think you can guess the word?</p>
         <hr class="my-5">
+
+        <!-- Just for mobile application -->
+        <div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px">
+        <input id="keyboard-button" type="textfield" autocorrect="off" autocapitalize="off">
+        </div>
+        <input type="button" value="Click for Keyboard" onclick="document.getElementById('keyboard-button').focus();" style="display: none;">
+        <!-- end mobile application -->
+
         <p id="get-started">Click play to begin!</p>
         <p id="press-any-letter" style="display: none;">Press any letter to guess!</p>
         <p class="lead">
             <a id="play" class="btn btn-primary btn-lg play-button mt-4 px-5" href="#" role="button">PLAY</a>
         </p>
-        <div style="overflow: hidden; position: relative; width: 1px; height: 1px; left: -500px">
-        <input id="input" type="textfield" autocorrect="off" autocapitalize="off">
-        </div>
-        <input type="button" value="Click here first" onclick="document.getElementById('input').focus();">
     </div>
 
     <!-- Current game -->
