@@ -34,7 +34,7 @@ function revealTheme(ObjectKey) {
         var rgbColor = 'rgb(' + r + ','+ g + ',' + b + ')'; 
         $('.theme').css('background-color', rgbColor);
        }
-    randomColor();
+    randomColor(); //<--- creates random background color for the theme
 }
 
 //creates a list item for each letter in the current word, assigns the list item an id that is the same number as the letter's index of the word, and inserts an underscore in each list item
