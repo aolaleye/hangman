@@ -1,4 +1,4 @@
-# Hangman-Game
+# Hangman
 
 __Game Instructions:__
 
