@@ -384,11 +384,11 @@ $("#final-score-button").click(function() {
     $(".bg-image").css("background", "#e9ecef").css("box-shadow", "none");
     $(".final-score").show();
     if (wins === 0) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Better Luck Next Time!</h2>');
+        $(".final-score").append('<h2>You Guessed ' + wins + ' Out of ' + Object.keys(words).length + ' Words.<br><br>Better Luck Next Time!</h2>');
     } else if (wins === 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Good Effort!</h2>');
+        $(".final-score").append('<h2>You Guessed ' + wins + ' Out of ' + Object.keys(words).length + ' Words.<br><br>Good Effort!</h2>');
     } else if (wins > 1) {
-        $(".final-score").append('<h2>You Won ' + wins + ' Out of ' + Object.keys(words).length + ' Times.<br><br>Awesome Job!</h2>');
+        $(".final-score").append('<h2>You Guessed ' + wins + ' Out of ' + Object.keys(words).length + ' Words.<br><br>Awesome Job!</h2>');
     }
 });
 
