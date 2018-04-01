@@ -73,6 +73,12 @@ ul li {
     border: 6px double #fff;
 }
 
+.keyboard input {
+    padding: 1em 40em;
+    background-color: transparent;
+    border: none;
+}
+
 /* ----- media queries ----- */
 
 /* tablets (landscape) and bigger */
