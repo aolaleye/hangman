@@ -92,4 +92,8 @@ ul li {
         font-size: 5.5em;
         letter-spacing: .6em;
     }
+
+    .keyboard input {
+        padding: 0 25em;
+    }
 }
