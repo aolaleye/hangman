@@ -1,6 +1,6 @@
 # Hangman
 
-__Game Instructions:__
+#### __Game Instructions:__
 
 * The player is shown an outline of letters that represent a mystery word. 
 * The player is given 12 guesses to guess the word.
@@ -8,3 +8,6 @@ __Game Instructions:__
 * If the player is running low on guesses and hasn't guessed a lot of correct letters, the player is offered a hint.
 * If the player guesses the word, an image of the word appears, and the number of wins increase by one.
 * If the player fails to guess the word, the word is revealed, and an image of the word appears.
+
+#### > __Try it Out:__
+[![Hangman](images/hangman2.png)](https://aolaleye.github.io/hangman/)
