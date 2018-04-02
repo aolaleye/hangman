@@ -10,4 +10,4 @@
 * If the player fails to guess the word, the word is revealed, and an image of the word appears.
 
 #### > __Try it Out:__
-[![Hangman](images/hangman2.png)](https://aolaleye.github.io/hangman/)
+[![Hangman](assets/images/hangman2.png)](https://aolaleye.github.io/hangman/)
