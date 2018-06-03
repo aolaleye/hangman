@@ -9,5 +9,5 @@
 * If the player guesses the word, an image of the word appears, and the number of wins increase by one.
 * If the player fails to guess the word, the word is revealed, and an image of the word appears.
 
-#### > __Try it Out:__
+#### > __Click Below to Try it Out:__
 [![Hangman](assets/images/hangman2.png)](https://aolaleye.github.io/hangman/)
